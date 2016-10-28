@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.novoda:bintray-release:0.3.4'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    compileSdkVersion = 25
+    buildToolsVersion = "25.0.0"
+
+    applicationId = "jp.seesaa.android.awesomedialog"
+    resourcePrefix = 'dlg_'
+    minSdkVersion = 14
+    targetSdkVersion = 25
+    versionCode = 1
+    versionName = "0.1.0"
+
+    deps = [
+            supportFragment: 'com.android.support:support-fragment:25.0.0',
+            supportV4      : 'com.android.support:support-v4:25.0.0',
+            supportV7      : 'com.android.support:appcompat-v7:25.0.0'
+
+    ]
+}
