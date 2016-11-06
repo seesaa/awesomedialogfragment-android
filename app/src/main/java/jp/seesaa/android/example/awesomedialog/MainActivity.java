@@ -1,46 +1,60 @@
 package jp.seesaa.android.example.awesomedialog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import jp.seesaa.android.library.dialog.AwesomeDialogFragment;
-import jp.seesaa.android.library.dialog.MaterialDialogFragment;
 
-public class MainActivity extends AppCompatActivity implements AwesomeDialogFragment.Callback {
-    private static final String TAG = MainActivity.class.getSimpleName();
+
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    @BindView(R.id.listView)
+    ListView listView;
+
+    private static final String[] ITEMS = {
+            "Activity w/ Callbacks",
+            "Activity w/o Callbacks",
+            "Fragment w/ Callbacks",
+            "Fragment w/o Callbacks"
+    };
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-    }
 
-    @OnClick(R.id.button)
-    void clickButton() {
-        new MaterialDialogFragment.Builder(this)
-                .title("Title")
-                .message("Message")
-                .positive("Positive")
-                .negative("Negative")
-                .requestCode(12345)
-                .show();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ITEMS);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
-    public void onMyDialogSucceeded(int requestCode, int resultCode, Bundle params) {
-        Log.d(TAG, "onMyDialogSucceeded: " + requestCode + " / " + resultCode);
-        Toast.makeText(this, "Succeeded: " + requestCode, Toast.LENGTH_SHORT).show();
-    }
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = null;
 
-    @Override
-    public void onMyDialogCancelled(int requestCode, Bundle params) {
-        Log.d(TAG, "onMyDialogCancelled: " + requestCode);
-        Toast.makeText(this, "Cencelled: " + requestCode, Toast.LENGTH_SHORT).show();
+        switch (position) {
+            case 0:
+                intent = CallbackDemoActivity.createIntent(this);
+                break;
+            case 1:
+                intent = DemoActivity.createIntent(this);
+                break;
+            case 2:
+            case 3:
+                intent = FragmentDemoActivity.createIntent(this, position == 2);
+                break;
+        }
+
+        if (intent != null) {
+            startActivity(intent);
+        }
     }
 }
