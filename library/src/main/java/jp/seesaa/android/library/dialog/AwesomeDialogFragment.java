@@ -20,7 +20,7 @@ public abstract class AwesomeDialogFragment extends DialogFragment {
          * Dialog で positiveButton, NegativeButton, リスト選択など行われた際に呼ばれる.
          *
          * @param requestCode DialogFragment 実行時 requestCode
-         * @param resultCode  DialogInterface.BUTTON_(POSI|NEGA)TIVE 若しくはリストの position
+         * @param resultCode  DialogInterface.BUTTON_POSITIVE, DialogInterface.BUTTON_NEGATIVE, DialogInterface.BUTTON_NEUTRAL もしくはリストの position
          * @param params      DialogFragment に受渡した引数
          */
         void onMyDialogSucceeded(int requestCode, int resultCode, Bundle params);
@@ -54,6 +54,10 @@ public abstract class AwesomeDialogFragment extends DialogFragment {
 
     protected String getNegativeLabel() {
         return getArguments().getString(AbstractBuilder.ARGS_NEGATIVE_LABEL);
+    }
+
+    protected String getNeutralLabel() {
+        return getArguments().getString(AbstractBuilder.ARGS_NEUTRAL_LABEL);
     }
 
     protected boolean getCancelable() {

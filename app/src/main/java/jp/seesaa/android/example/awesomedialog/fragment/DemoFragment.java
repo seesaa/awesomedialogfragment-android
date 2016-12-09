@@ -37,6 +37,7 @@ public class DemoFragment extends Fragment {
                 .message("Message")
                 .positive("Positive")
                 .negative("Negative")
+                .neutral("Neutral")
                 .requestCode(12345)
                 .show();
     }

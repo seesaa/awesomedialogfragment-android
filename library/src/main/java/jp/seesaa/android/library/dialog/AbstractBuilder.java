@@ -19,6 +19,7 @@ public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends
     public static final String ARGS_ITEMS = "items";
     public static final String ARGS_POSITIVE_LABEL = "positive_label";
     public static final String ARGS_NEGATIVE_LABEL = "negative_label";
+    public static final String ARGS_NEUTRAL_LABEL = "neutral_label";
     public static final String ARGS_CANCELABLE = "cancelable";
     public static final String ARGS_DIALOG_THEME = "dialog_theme";
     public static final String ARGS_PARAMS = "params";
@@ -33,6 +34,7 @@ public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends
 
     private String mPositiveLabel;
     private String mNegativeLabel;
+    private String mNeutralLabel;
 
     /**
      * リクエストコード. 親 Fragment 側の戻りで受け取る.
@@ -116,6 +118,15 @@ public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends
         return negative(getContext().getString(negativeLabelRes));
     }
 
+    public T neutral(@NonNull String neutralLabel) {
+        this.mNeutralLabel = neutralLabel;
+        return self();
+    }
+
+    public T neutral(@StringRes int neutralLabelRes) {
+        return neutral(getContext().getString(neutralLabelRes));
+    }
+
     /**
      * Dialogからのコールバック判定に用いるrequestCodeを設定する
      *
@@ -172,6 +183,7 @@ public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends
         args.putStringArray(ARGS_ITEMS, mItems);
         args.putString(ARGS_POSITIVE_LABEL, mPositiveLabel);
         args.putString(ARGS_NEGATIVE_LABEL, mNegativeLabel);
+        args.putString(ARGS_NEUTRAL_LABEL, mNeutralLabel);
         args.putBoolean(ARGS_CANCELABLE, mCancelable);
         args.putInt(ARGS_DIALOG_THEME, mDialogTheme);
 

@@ -63,6 +63,10 @@ public class MaterialDialogFragment extends AwesomeDialogFragment {
             builder.setNegativeButton(getNegativeLabel(), listener);
         }
 
+        if (!isEmpty(getNeutralLabel())) {
+            builder.setNeutralButton(getNeutralLabel(), listener);
+        }
+
         return builder.create();
     }
 }

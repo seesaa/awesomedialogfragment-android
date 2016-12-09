@@ -30,6 +30,7 @@ public class DemoActivity extends AppCompatActivity {
                 .message("Message")
                 .positive("Positive")
                 .negative("Negative")
+                .neutral("Neutral")
                 .requestCode(12345)
                 .show();
     }
