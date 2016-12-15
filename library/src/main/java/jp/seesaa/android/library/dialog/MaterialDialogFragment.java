@@ -49,7 +49,9 @@ public class MaterialDialogFragment extends AwesomeDialogFragment {
             }
         };
 
-        builder.setTitle(getTitle()).setMessage(getMessage());
+        builder.setTitle(getTitle())
+                .setMessage(getMessage())
+                .setCancelable(getCancelable());
 
         if (getItems() != null) {
             builder.setItems(getItems(), listener);
@@ -67,6 +69,9 @@ public class MaterialDialogFragment extends AwesomeDialogFragment {
             builder.setNeutralButton(getNeutralLabel(), listener);
         }
 
-        return builder.create();
+        AlertDialog alertDialog = builder.create();
+        alertDialog.setCanceledOnTouchOutside(getCancelable());
+
+        return alertDialog;
     }
 }
