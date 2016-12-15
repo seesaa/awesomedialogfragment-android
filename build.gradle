@@ -3,7 +3,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.novoda:bintray-release:0.3.4'
     }
 }
@@ -20,7 +20,7 @@ task clean(type: Delete) {
 
 ext {
     compileSdkVersion = 25
-    buildToolsVersion = "25.0.0"
+    buildToolsVersion = "25.0.2"
 
     applicationId = "jp.seesaa.android.awesomedialog"
     resourcePrefix = 'dlg_'
@@ -30,9 +30,9 @@ ext {
     versionName = "0.2.0"
 
     deps = [
-            supportFragment: 'com.android.support:support-fragment:25.0.0',
-            supportV4      : 'com.android.support:support-v4:25.0.0',
-            supportV7      : 'com.android.support:appcompat-v7:25.0.0'
+            supportFragment: 'com.android.support:support-fragment:25.0.1',
+            supportV4      : 'com.android.support:support-v4:25.0.1',
+            supportV7      : 'com.android.support:appcompat-v7:25.0.1'
 
     ]
 }
