@@ -61,12 +61,12 @@ public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends
      */
     private int mDialogTheme = -1;
 
-    AbstractBuilder(@NonNull FragmentActivity activity) {
+    protected AbstractBuilder(@NonNull FragmentActivity activity) {
         this.activity = activity;
         this.parentFragment = null;
     }
 
-    AbstractBuilder(Fragment parentFragment) {
+    protected AbstractBuilder(Fragment parentFragment) {
         this.activity = null;
         this.parentFragment = parentFragment;
     }
