@@ -50,7 +50,7 @@ public abstract class AwesomeDialogFragment extends DialogFragment {
     /**
      * コールバックを保持するメンバー。
      *
-     * @deprecated 代わりに {@link this#successCallback}, {@link this#cancelCallback} を用いること。
+     * @deprecated 代わりに {@link AwesomeDialogFragment#successCallback}, {@link AwesomeDialogFragment#cancelCallback} を用いること。
      */
     @Nullable
     @Deprecated
