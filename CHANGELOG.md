@@ -1,6 +1,10 @@
 Changelog
 =========
 
+# 0.4.0
+
+- Separate `SuccessCallback` and `CancelCallback` from `Callback`.
+
 # 0.3.0
 
 - `AbstractBuilder`'s constructor accessible protected.
