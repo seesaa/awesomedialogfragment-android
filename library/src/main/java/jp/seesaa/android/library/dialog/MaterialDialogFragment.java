@@ -43,8 +43,8 @@ public class MaterialDialogFragment extends AwesomeDialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MaterialDialogFragment.this.dismiss();
-                if (callback != null) {
-                    callback.onMyDialogSucceeded(getRequestCode(), i, getParams());
+                if (successCallback != null) {
+                    successCallback.onMyDialogSucceeded(getRequestCode(), i, getParams());
                 }
             }
         };

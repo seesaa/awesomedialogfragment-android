@@ -3,9 +3,9 @@ package jp.seesaa.android.library.dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 
 import jp.seesaa.android.library.dialog.util.FragmentUtil;
 
@@ -14,8 +14,16 @@ public abstract class AwesomeDialogFragment extends DialogFragment {
 
     /**
      * Dialog で何か処理が起こった場合にコールバックされるリスナ.
+     * {@link SuccessCallback} および {@link CancelCallback} の双方を実装している
      */
-    public interface Callback {
+    public interface Callback extends SuccessCallback, CancelCallback {
+    }
+
+    /**
+     * Dialog でボタンやリストが選択された際にコールバックされるリスナ.
+     * Cancel関連を実装する必要が無い場合はこちらだけを実装しても機能する.
+     */
+    public interface SuccessCallback {
         /**
          * Dialog で positiveButton, NegativeButton, リスト選択など行われた際に呼ばれる.
          *
@@ -24,7 +32,12 @@ public abstract class AwesomeDialogFragment extends DialogFragment {
          * @param params      DialogFragment に受渡した引数
          */
         void onMyDialogSucceeded(int requestCode, int resultCode, Bundle params);
+    }
 
+    /**
+     * Dialog がキャンセル(DialogInterface.BUTTON_CANCELを除く)された際にコールバックされるリスナ.
+     */
+    public interface CancelCallback {
         /**
          * Dialog がキャンセルされた時に呼ばれる.
          *
@@ -34,7 +47,20 @@ public abstract class AwesomeDialogFragment extends DialogFragment {
         void onMyDialogCancelled(int requestCode, Bundle params);
     }
 
+    /**
+     * コールバックを保持するメンバー。
+     *
+     * @deprecated 代わりに {@link this#successCallback}, {@link this#cancelCallback} を用いること。
+     */
+    @Nullable
+    @Deprecated
     protected Callback callback;
+
+    @Nullable
+    protected SuccessCallback successCallback;
+
+    @Nullable
+    protected CancelCallback cancelCallback;
 
     protected String getTitle() {
         return getArguments().getString(AbstractBuilder.ARGS_TITLE);
@@ -89,21 +115,45 @@ public abstract class AwesomeDialogFragment extends DialogFragment {
         super.onAttach(context);
 
         try {
-            callback = FragmentUtil.registeredListener(this, Callback.class);
-        } catch (ClassNotFoundException e) {
-            Log.e(TAG, "Catch!", e);
+            successCallback = FragmentUtil.registeredListener(this, SuccessCallback.class);
+        } catch (ClassNotFoundException ignored) {
         }
+
+        try {
+            cancelCallback = FragmentUtil.registeredListener(this, CancelCallback.class);
+        } catch (ClassNotFoundException ignored) {
+        }
+
+        callback = new Callback() {
+            @Override
+            public void onMyDialogSucceeded(int requestCode, int resultCode, Bundle params) {
+                if (successCallback != null) {
+                    successCallback.onMyDialogSucceeded(requestCode, resultCode, params);
+                }
+            }
+
+            @Override
+            public void onMyDialogCancelled(int requestCode, Bundle params) {
+                if (cancelCallback != null) {
+                    cancelCallback.onMyDialogCancelled(requestCode, params);
+                }
+            }
+        };
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         callback = null;
+        successCallback = null;
+        cancelCallback = null;
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        callback.onMyDialogCancelled(getRequestCode(), getArguments().getBundle(AbstractBuilder.ARGS_PARAMS));
+        if (cancelCallback != null) {
+            cancelCallback.onMyDialogCancelled(getRequestCode(), getArguments().getBundle(AbstractBuilder.ARGS_PARAMS));
+        }
     }
 
 }

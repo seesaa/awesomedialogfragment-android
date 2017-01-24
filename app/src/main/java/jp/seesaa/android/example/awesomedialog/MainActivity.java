@@ -21,8 +21,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final String[] ITEMS = {
             "Activity w/ Callbacks",
             "Activity w/o Callbacks",
+            "Activity w SuccessCallback only",
             "Fragment w/ Callbacks",
-            "Fragment w/o Callbacks"
+            "Fragment w/o Callbacks",
+            "Fragment w SuccessCallback only",
     };
 
     @Override
@@ -48,8 +50,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 intent = DemoActivity.createIntent(this);
                 break;
             case 2:
+                intent = SuccessCallbackDemoActivity.createIntent(this);
+                break;
+
             case 3:
-                intent = FragmentDemoActivity.createIntent(this, position == 2);
+                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITH_CALLBACK);
+                break;
+            case 4:
+                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITHOUT_CALLBACK);
+                break;
+            case 5:
+                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITH_SUCCESS_CALLBACK_ONLY);
                 break;
         }
 
