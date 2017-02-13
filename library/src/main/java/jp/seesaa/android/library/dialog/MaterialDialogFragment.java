@@ -50,8 +50,7 @@ public class MaterialDialogFragment extends AwesomeDialogFragment {
         };
 
         builder.setTitle(getTitle())
-                .setMessage(getMessage())
-                .setCancelable(getCancelable());
+                .setMessage(getMessage());
 
         if (getItems() != null) {
             builder.setItems(getItems(), listener);
@@ -71,6 +70,7 @@ public class MaterialDialogFragment extends AwesomeDialogFragment {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.setCanceledOnTouchOutside(getCancelable());
+        setCancelable(getCancelable());
 
         return alertDialog;
     }

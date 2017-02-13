@@ -60,9 +60,10 @@ public class ProgressDialogFragment extends AwesomeDialogFragment {
         int progressMax = getArguments().getInt(Builder.ARGS_MAX);
 
         dialog.setMessage(getMessage());
-        dialog.setCancelable(getCancelable());
         dialog.setCanceledOnTouchOutside(getCancelable());
         dialog.setMax(progressMax);
+
+        setCancelable(getCancelable());
 
         return dialog;
     }
