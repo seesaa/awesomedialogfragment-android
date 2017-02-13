@@ -1,10 +1,13 @@
+apply plugin: 'com.github.ben-manes.versions'
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath 'com.novoda:bintray-release:0.3.4'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
+        classpath 'com.novoda:bintray-release:0.4.0'
     }
 }
 
@@ -30,9 +33,6 @@ ext {
     versionName = "0.4.0"
 
     deps = [
-            supportFragment: 'com.android.support:support-fragment:25.0.1',
-            supportV4      : 'com.android.support:support-v4:25.0.1',
-            supportV7      : 'com.android.support:appcompat-v7:25.0.1'
-
+            supportV7      : 'com.android.support:appcompat-v7:25.1.1'
     ]
 }
