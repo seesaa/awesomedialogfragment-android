@@ -15,8 +15,11 @@ import jp.seesaa.android.library.dialog.MaterialDialogFragment;
 
 public class DemoFragment extends Fragment {
 
-    public static DemoFragment newInstance() {
+    protected static final String ARGS_CANCELABLE = "ARGS_CANCELABLE";
+
+    public static DemoFragment newInstance(boolean isCancelable) {
         Bundle args = new Bundle();
+        args.putBoolean(ARGS_CANCELABLE, isCancelable);
         DemoFragment fragment = new DemoFragment();
         fragment.setArguments(args);
         return fragment;
@@ -32,6 +35,8 @@ public class DemoFragment extends Fragment {
 
     @OnClick(R.id.button)
     void onClickButton() {
+        boolean isCancelable = getArguments().getBoolean(ARGS_CANCELABLE, true);
+
         new MaterialDialogFragment.Builder(this)
                 .title("Title")
                 .message("Message")
@@ -39,6 +44,7 @@ public class DemoFragment extends Fragment {
                 .negative("Negative")
                 .neutral("Neutral")
                 .requestCode(12345)
+                .cancelable(isCancelable)
                 .show();
     }
 

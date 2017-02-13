@@ -12,6 +12,8 @@ import jp.seesaa.android.library.dialog.MaterialDialogFragment;
 
 public class DemoActivity extends AppCompatActivity {
 
+    protected static final String ARGS_CANCELABLE = "cancelable";
+
     public static Intent createIntent(Context context) {
         return new Intent(context, DemoActivity.class);
     }
@@ -25,6 +27,8 @@ public class DemoActivity extends AppCompatActivity {
 
     @OnClick(R.id.button)
     void clickButton() {
+        boolean isCancelable = getIntent().getBooleanExtra(ARGS_CANCELABLE, true);
+
         new MaterialDialogFragment.Builder(this)
                 .title("Title")
                 .message("Message")
@@ -32,6 +36,7 @@ public class DemoActivity extends AppCompatActivity {
                 .negative("Negative")
                 .neutral("Neutral")
                 .requestCode(12345)
+                .cancelable(isCancelable)
                 .show();
     }
 

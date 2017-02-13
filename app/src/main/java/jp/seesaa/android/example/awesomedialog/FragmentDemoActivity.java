@@ -19,6 +19,7 @@ import jp.seesaa.android.example.awesomedialog.fragment.SuccessCallbackDemoFragm
 public class FragmentDemoActivity extends AppCompatActivity {
 
     private static final String EXTRA_FRAGMENT_TYPE = "EXTRA_FRAGMENT_TYPE";
+    private static final String EXTRA_CANCELABLE = "EXTRA_CANCELABLE";
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({FragmentType.WITH_CALLBACK, FragmentType.WITHOUT_CALLBACK, FragmentType.WITH_SUCCESS_CALLBACK_ONLY})
@@ -28,9 +29,10 @@ public class FragmentDemoActivity extends AppCompatActivity {
         int WITH_SUCCESS_CALLBACK_ONLY = 2;
     }
 
-    public static Intent createIntent(Context context, @FragmentType int fragmentType) {
+    public static Intent createIntent(Context context, @FragmentType int fragmentType, boolean isCancelable) {
         Intent intent = new Intent(context, FragmentDemoActivity.class);
         intent.putExtra(EXTRA_FRAGMENT_TYPE, fragmentType);
+        intent.putExtra(EXTRA_CANCELABLE, isCancelable);
         return intent;
     }
 
@@ -41,17 +43,18 @@ public class FragmentDemoActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             @FragmentType int fragmentType = extras.getInt(EXTRA_FRAGMENT_TYPE);
+            boolean isCancelable = extras.getBoolean(EXTRA_CANCELABLE, true);
 
             Fragment f = null;
             switch (fragmentType) {
                 case FragmentType.WITHOUT_CALLBACK:
-                    f = DemoFragment.newInstance();
+                    f = DemoFragment.newInstance(isCancelable);
                     break;
                 case FragmentType.WITH_CALLBACK:
-                    f = CallbackDemoFragment.newInstance();
+                    f = CallbackDemoFragment.newInstance(isCancelable);
                     break;
                 case FragmentType.WITH_SUCCESS_CALLBACK_ONLY:
-                    f = SuccessCallbackDemoFragment.newInstance();
+                    f = SuccessCallbackDemoFragment.newInstance(isCancelable);
                     break;
             }
 

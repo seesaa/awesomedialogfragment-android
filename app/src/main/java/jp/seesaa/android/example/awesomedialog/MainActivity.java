@@ -21,10 +21,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final String[] ITEMS = {
             "Activity w/ Callbacks",
             "Activity w/o Callbacks",
-            "Activity w SuccessCallback only",
+            "Activity w/ SuccessCallback only",
+            "Activity w/ cancelable = false",
+
             "Fragment w/ Callbacks",
             "Fragment w/o Callbacks",
-            "Fragment w SuccessCallback only",
+            "Fragment w/ SuccessCallback only",
+            "Fragment w/ cancelable = false",
     };
 
     @Override
@@ -50,17 +53,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 intent = DemoActivity.createIntent(this);
                 break;
             case 2:
-                intent = SuccessCallbackDemoActivity.createIntent(this);
+                intent = SuccessCallbackDemoActivity.createIntent(this, true);
+                break;
+            case 3:
+                intent = SuccessCallbackDemoActivity.createIntent(this, false);
                 break;
 
-            case 3:
-                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITH_CALLBACK);
-                break;
             case 4:
-                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITHOUT_CALLBACK);
+                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITH_CALLBACK, true);
                 break;
             case 5:
-                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITH_SUCCESS_CALLBACK_ONLY);
+                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITHOUT_CALLBACK, true);
+                break;
+            case 6:
+                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITH_SUCCESS_CALLBACK_ONLY, true);
+                break;
+            case 7:
+                intent = FragmentDemoActivity.createIntent(this, FragmentDemoActivity.FragmentType.WITH_SUCCESS_CALLBACK_ONLY, false);
                 break;
         }
 

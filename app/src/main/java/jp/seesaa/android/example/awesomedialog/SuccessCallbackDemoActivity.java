@@ -12,8 +12,10 @@ public class SuccessCallbackDemoActivity extends DemoActivity implements
         AwesomeDialogFragment.SuccessCallback {
     private static final String TAG = SuccessCallbackDemoActivity.class.getSimpleName();
 
-    public static Intent createIntent(Context context) {
-        return new Intent(context, SuccessCallbackDemoActivity.class);
+    public static Intent createIntent(Context context, boolean isCancelable) {
+        Intent intent = new Intent(context, SuccessCallbackDemoActivity.class);
+        intent.putExtra(ARGS_CANCELABLE, isCancelable);
+        return intent;
     }
 
     @Override

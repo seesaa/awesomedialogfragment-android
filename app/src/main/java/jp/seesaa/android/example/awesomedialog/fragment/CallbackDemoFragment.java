@@ -9,8 +9,9 @@ import jp.seesaa.android.library.dialog.AwesomeDialogFragment;
 public class CallbackDemoFragment extends DemoFragment implements AwesomeDialogFragment.Callback {
     private static final String TAG = CallbackDemoFragment.class.getSimpleName();
 
-    public static CallbackDemoFragment newInstance() {
+    public static CallbackDemoFragment newInstance(boolean isCancelable) {
         Bundle args = new Bundle();
+        args.putBoolean(ARGS_CANCELABLE, isCancelable);
         CallbackDemoFragment fragment = new CallbackDemoFragment();
         fragment.setArguments(args);
         return fragment;

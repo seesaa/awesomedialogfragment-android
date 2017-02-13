@@ -10,8 +10,9 @@ public class SuccessCallbackDemoFragment extends DemoFragment implements
         AwesomeDialogFragment.SuccessCallback {
     private static final String TAG = SuccessCallbackDemoFragment.class.getSimpleName();
 
-    public static SuccessCallbackDemoFragment newInstance() {
+    public static SuccessCallbackDemoFragment newInstance(boolean isCancelable) {
         Bundle args = new Bundle();
+        args.putBoolean(ARGS_CANCELABLE, isCancelable);
         SuccessCallbackDemoFragment fragment = new SuccessCallbackDemoFragment();
         fragment.setArguments(args);
         return fragment;
