@@ -59,7 +59,7 @@ public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends
     /**
      * ダイアログのテーマ
      */
-    private int mDialogTheme = -1;
+    private int mDialogTheme = 0;
 
     protected AbstractBuilder(@NonNull FragmentActivity activity) {
         this.activity = activity;
