@@ -2,14 +2,15 @@ package jp.seesaa.android.library.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.ArrayRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
-import android.support.annotation.StyleRes;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
+
+import androidx.annotation.ArrayRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
+import androidx.annotation.StyleRes;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends AwesomeDialogFragment> {
     private static final String TAG = AbstractBuilder.class.getSimpleName();
