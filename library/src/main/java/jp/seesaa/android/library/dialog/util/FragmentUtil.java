@@ -1,6 +1,6 @@
 package jp.seesaa.android.library.dialog.util;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 public class FragmentUtil {
 

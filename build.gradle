@@ -6,9 +6,9 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.13.0'
-        classpath 'com.novoda:bintray-release:0.8.1'
+        classpath 'com.android.tools.build:gradle:3.2.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.17.0'
+        classpath 'guru.stefma.bintrayrelease:bintrayrelease:1.0.0'
     }
 }
 
@@ -24,17 +24,17 @@ task clean(type: Delete) {
 }
 
 ext {
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.2"
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.2"
 
     applicationId = "jp.seesaa.android.awesomedialog"
     resourcePrefix = 'dlg_'
     minSdkVersion = 14
-    targetSdkVersion = 25
+    targetSdkVersion = 28
     versionCode = 8
     versionName = "0.6.2"
 
     deps = [
-            supportV7      : 'com.android.support:appcompat-v7:25.1.1'
+            appcomat      : 'androidx.appcompat:appcompat:1.0.0'
     ]
 }

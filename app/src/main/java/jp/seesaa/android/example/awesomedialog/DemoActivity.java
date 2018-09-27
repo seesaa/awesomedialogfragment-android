@@ -3,16 +3,18 @@ package jp.seesaa.android.example.awesomedialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import jp.seesaa.android.example.awesomedialog.databinding.ActivityDemoBinding;
 import jp.seesaa.android.library.dialog.MaterialDialogFragment;
 
 public class DemoActivity extends AppCompatActivity {
 
     protected static final String ARGS_CANCELABLE = "cancelable";
+    private ActivityDemoBinding binding;
 
     public static Intent createIntent(Context context) {
         return new Intent(context, DemoActivity.class);
@@ -21,11 +23,16 @@ public class DemoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_demo);
-        ButterKnife.bind(this);
+        DataBindingUtil.setContentView(this, R.layout.activity_demo);
+
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickButton();
+            }
+        });
     }
 
-    @OnClick(R.id.button)
     void clickButton() {
         boolean isCancelable = getIntent().getBooleanExtra(ARGS_CANCELABLE, true);
 
@@ -39,5 +46,4 @@ public class DemoActivity extends AppCompatActivity {
                 .cancelable(isCancelable)
                 .show();
     }
-
 }

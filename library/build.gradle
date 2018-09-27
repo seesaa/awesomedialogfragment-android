@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'guru.stefma.bintrayrelease'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -11,7 +11,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -23,20 +23,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
-    compile rootProject.ext.deps.supportV7
+    implementation rootProject.ext.deps.appcomat
 }
 
 publish {
     userOrg = 'seesaa'
-    groupId = 'jp.seesaa.android'
+    group = 'jp.seesaa.android'
     artifactId = 'awesomedialogfragment'
-    publishVersion = rootProject.ext.versionName
+    version = rootProject.ext.versionName
     desc = 'Awesome DialogFragment library for Android'
     website = 'https://github.com/seesaa/awesomedialogfragment-android'
     issueTracker = "${website}/issues"

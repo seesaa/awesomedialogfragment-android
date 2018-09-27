@@ -2,21 +2,15 @@ package jp.seesaa.android.example.awesomedialog;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import jp.seesaa.android.example.awesomedialog.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-
-    @BindView(R.id.listView)
-    ListView listView;
 
     private static final String[] ITEMS = {
             "Activity w/ Callbacks",
@@ -30,15 +24,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             "Fragment w/ cancelable = false",
     };
 
+    private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, ITEMS);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
+        binding.listView.setAdapter(adapter);
+        binding.listView.setOnItemClickListener(this);
     }
 
     @Override
