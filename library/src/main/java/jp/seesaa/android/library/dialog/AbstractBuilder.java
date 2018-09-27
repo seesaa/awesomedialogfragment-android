@@ -210,7 +210,7 @@ public abstract class AbstractBuilder<T extends AbstractBuilder<T, F>, F extends
 
         FragmentManager fm;
         if (parentFragment != null) {
-            fm = parentFragment.getChildFragmentManager();
+            fm = parentFragment.getFragmentManager();
         } else {
             fm = activity.getSupportFragmentManager();
         }
