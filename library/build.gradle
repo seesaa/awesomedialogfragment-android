@@ -1,9 +1,8 @@
 apply plugin: 'com.android.library'
-apply plugin: 'guru.stefma.bintrayrelease'
+apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
@@ -32,13 +31,4 @@ dependencies {
     implementation rootProject.ext.deps.appcomat
 }
 
-publish {
-    userOrg = 'seesaa'
-    group = 'jp.seesaa.android'
-    artifactId = 'awesomedialogfragment'
-    version = rootProject.ext.versionName
-    desc = 'Awesome DialogFragment library for Android'
-    website = 'https://github.com/seesaa/awesomedialogfragment-android'
-    issueTracker = "${website}/issues"
-    repository = "${website}.git"
-}
+apply from: "${project.rootDir}/publish.gradle"

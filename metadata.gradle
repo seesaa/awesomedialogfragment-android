@@ -1,0 +1,12 @@
+ext {
+    metadata = [
+            userOrg   : 'seesaa', // https://bintray.com/seesaa
+            name      : 'awesomedialogfragment',
+            groupId   : 'jp.seesaa.android',
+            website   : 'https://github.com/seesaa/awesomedialogfragment-android',
+            repository: 'https://github.com/seesaa/awesomedialogfragment-android.git',
+            desc      : 'Awesome DialogFragment library for Android',
+            licences  : ['Apache-2.0'],
+            version   : rootProject.ext.versionName
+    ]
+}

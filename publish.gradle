@@ -1,0 +1,69 @@
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+apply from: "${project.rootDir}/metadata.gradle"
+
+
+group = metadata.groupId
+version = metadata.version
+
+bintray {
+    user = findProperty('user')
+    key = findProperty('key')
+    configurations = ['archives']
+
+    pkg {
+        repo = 'maven'
+        name = metadata.name
+        desc = metadata.desc
+        userOrg = metadata.userOrg
+        websiteUrl = metadata.website
+        vcsUrl = metadata.repository
+        licenses = metadata.licences
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+
+install {
+    repositories {
+        mavenInstaller {
+            pom.project {
+                packaging 'aar'
+                artifactId metadata.name
+                url metadata.website
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection metadata.repository
+                    developerConnection metadata.repository
+                    url metadata.website
+                }
+            }
+        }
+    }
+}
